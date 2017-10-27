@@ -56,6 +56,15 @@ node_tests = [
                       pad_width=((0, 0), (0, 0), (1, 1), (1, 1)),
                       mode='edge'),
      [(1, 3, L, M)]),
+    ("test_slice",
+     N("Slice", axes=[0, 1], starts=[0, 0], ends=[3, M]),
+     lambda x: x[0:3, 0:M], [(L, M, S)]),
+    ("test_slice_neg",
+     N("Slice", axes=[1], starts=[0], ends=[-1]),
+     lambda x: x[:, 0:-1], [(L, M, S)]),
+    ("test_slice_default_axes",
+     N("Slice", starts=[0, 0, 3], ends=[L, M, 4]),
+     lambda x: x[:, :, 3:4], [(L, M, S)]),
     # TODO: Add all the other operators
 ] + test_rnn.node_tests
 
